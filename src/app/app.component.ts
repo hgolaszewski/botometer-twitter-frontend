@@ -151,8 +151,8 @@ export class AppComponent {
           finalizeRequest();
         }, (errorResponse) => {
           finalizeRequest();
-          if (errorResponse.status == 503) {
-            console.log(errorResponse);
+          console.log(errorResponse);
+          if (errorResponse.error.status == 503) {
             this.errorMessage = 'Request timed out or service is unavailable, reload page';
           } else {
             this.errorMessage = errorResponse.error.message;
