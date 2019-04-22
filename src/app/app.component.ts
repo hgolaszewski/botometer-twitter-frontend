@@ -152,7 +152,7 @@ export class AppComponent {
         }, (errorResponse) => {
           finalizeRequest();
           if (errorResponse.status == 0) {
-            this.errorMessage = 'Request timed out or service is unavailable, reload page';
+            this.listScoreForUser(username);
           } else {
             this.errorMessage = errorResponse.error.message;
           }
