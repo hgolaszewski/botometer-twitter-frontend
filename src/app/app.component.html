@@ -1,0 +1,79 @@
+<div style="padding: 10px;">
+  <div class="row">
+    <div class="col-md-12 col-sm-12" style="height: 50px;">
+      <div *ngIf="isProgressBarVisible()" class="progress" style="background-color: lightgrey">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [style.width.%]="getProgressBarPercentageValue()">
+        </div>
+      </div>
+      <div *ngIf="errorMessage !== null && !isProgressBarVisible()">
+        <div class="alert alert-danger" style="text-align: center">
+          <b>{{errorMessage}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-2 col-sm-5">
+      <label for="search"><h6>Search:</h6></label>
+      <input [(ngModel)]="userNameToFilter"
+             (ngModelChange)="filterAccounts()"
+             [disabled]="isProgressBarVisible()"
+             class="form-control"
+             id="search">
+    </div>
+    <div class="col-md-2 col-sm-5">
+      <label for="username"><h6>Account:</h6></label>
+      <input [(ngModel)]="userNameToAdd"
+             [disabled]="isProgressBarVisible()"
+             class="form-control"
+             id="username"
+             style="margin-right: 10px">
+    </div>
+    <div class="col-md-2 col-sm-2">
+      <button [disabled]="isProgressBarVisible()"
+              (click)="addUser(userNameToAdd)"
+              type="button"
+              class="btn btn-primary btn-block"
+              style="min-width: 80px; margin-top: 40px; margin-right: 5px">
+        <span>Add</span>
+      </button>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-6 col-sm-12">
+      <div class="panel panel-primary" style="">
+        <div class="panel-heading"><h6>Observed accounts:</h6></div>
+        <div class="panel-body" style="overflow-y: scroll; height: 310px">
+          <div *ngFor="let user of usersFiltered" style="margin: 5px">
+            <img (click)="onAccountSelect(user)"
+                 src="{{user.imageUrl}}"
+                 class="img-thumbnail"
+                 style="cursor: pointer; margin-right: 10px">
+            <label>{{user.username}}</label>
+            <button (click)="deleteUser(user.id)"
+                    [disabled]="isProgressBarVisible()"
+                    type="button"
+                    class="btn btn-danger btn-md"
+                    style="float: right; margin-top: 7px">
+              <span>Delete</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12" style="margin-top: 30px">
+      <div style="max-width: 700px">
+        <canvas *ngIf="!isProgressBarVisible()"
+                baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [colors]="lineChartColors"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

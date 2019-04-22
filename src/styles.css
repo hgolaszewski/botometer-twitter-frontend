@@ -1,0 +1,13 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  background-size: cover;
+  color: #fff;
+  background: url("https://backgroundcheckall.com/wp-content/uploads/2017/12/blue-tech-background.png");
+}
+
+h6 {
+  font-weight: 600;
+}
