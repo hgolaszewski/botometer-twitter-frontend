@@ -151,7 +151,11 @@ export class AppComponent {
           finalizeRequest();
         }, (errorResponse) => {
           finalizeRequest();
-          this.errorMessage = errorResponse.error.message;
+          if (errorResponse.status == 403) {
+            this.errorMessage = 'Request timed out or service is unavailable, reload page';
+          } else {
+            this.errorMessage = errorResponse.error.message;
+          }
         })
     );
   }
